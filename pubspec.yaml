@@ -1,0 +1,37 @@
+name: flutter_pwa
+version: 1.0.0+1
+description: Mi aplicación Flutter como PWA.
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  firebase_core: ^2.32.0
+  firebase_messaging: ^14.7.20
+  firebase_auth: ^4.17.8
+  cloud_firestore: ^4.17.5
+  image_picker: ^1.1.2
+  file_picker: ^8.0.7
+  firebase_storage: ^11.7.6
+  cloud_functions: ^4.7.5
+  firebase_app_check: ^0.2.2+4
+  shared_preferences: ^2.2.3
+  flutter_localizations:
+    sdk: flutter
+  # Actual version required by current flutter_localizations (pinned to 0.20.2)
+  intl: ^0.20.2
+  image: ^4.1.7
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/cp_coords_es.csv
