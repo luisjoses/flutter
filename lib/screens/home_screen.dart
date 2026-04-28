@@ -425,18 +425,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: true,
         title: Container(
-          width: 52,
-          height: 52,
-          padding: const EdgeInsets.all(4),
+          width: 40,
+          height: 40,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Image.asset(
-            'assets/images/logo.png',
-            fit: BoxFit.contain,
-            alignment: Alignment.center,
-            filterQuality: FilterQuality.high,
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.black12),
           ),
         ),
         actions: [
