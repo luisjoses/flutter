@@ -404,6 +404,21 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: const Color(0xFF004d26),
         elevation: 0,
         toolbarHeight: 68,
+        flexibleSpace: IgnorePointer(
+          child: SafeArea(
+            child: Center(
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.black12),
+                ),
+              ),
+            ),
+          ),
+        ),
         leadingWidth: 44,
         leading: Builder(
           builder: (context) {
@@ -424,15 +439,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         centerTitle: true,
-        title: Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-            border: Border.all(color: Colors.black12),
-          ),
-        ),
+        title: const SizedBox.shrink(),
         actions: [
           IconButton(
             icon: Icon(Icons.handshake,
