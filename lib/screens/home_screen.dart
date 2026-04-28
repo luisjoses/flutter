@@ -423,7 +423,12 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         centerTitle: true,
-        title: Image.asset('assets/images/logo.png', height: 40),
+        title: Image.asset(
+          'assets/images/logo.png',
+          height: 40,
+          fit: BoxFit.contain,
+          alignment: Alignment.center,
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.handshake,
