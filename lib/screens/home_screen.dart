@@ -403,6 +403,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF004d26),
         elevation: 0,
+        toolbarHeight: 68,
         leadingWidth: 44,
         leading: Builder(
           builder: (context) {
@@ -423,11 +424,20 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         centerTitle: true,
-        title: Image.asset(
-          'assets/images/logo.png',
-          height: 40,
-          fit: BoxFit.contain,
-          alignment: Alignment.center,
+        title: Container(
+          width: 52,
+          height: 52,
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Image.asset(
+            'assets/images/logo.png',
+            fit: BoxFit.contain,
+            alignment: Alignment.center,
+            filterQuality: FilterQuality.high,
+          ),
         ),
         actions: [
           IconButton(
