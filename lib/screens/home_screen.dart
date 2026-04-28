@@ -1,8 +1,9 @@
-import 'dart:async';
+﻿import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../widgets/bysapp_app_bar_logo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../l10n/app_localizations.dart';
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
         final snap = await builder(FirebaseFirestore.instance.collection(coll));
         docs.addAll(snap.docs);
       } on FirebaseException catch (e) {
-        // Puede ocurrir si una colección tiene reglas más restrictivas.
+        // Puede ocurrir si una colecciÃ³n tiene reglas mÃ¡s restrictivas.
         if (e.code == 'permission-denied') {
           continue;
         }
@@ -104,12 +105,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final usuarioId = getUsuarioActualId();
     if (usuarioId.isEmpty) return;
     try {
-      // Tratos en los que el vendedor aún debe aceptar
+      // Tratos en los que el vendedor aÃºn debe aceptar
       final queryPendVendedor = await _queryEnColecciones(
         (coll) =>
             coll.where('vendedor', isEqualTo: usuarioId).where('enTrato', isEqualTo: true).get(),
       );
-      // Tratos en los que el comprador aún debe aceptar
+      // Tratos en los que el comprador aÃºn debe aceptar
       final queryPendComprador = await _queryEnColecciones(
         (coll) =>
             coll.where('comprador', isEqualTo: usuarioId).where('enTrato', isEqualTo: true).get(),
@@ -130,8 +131,8 @@ class _HomeScreenState extends State<HomeScreen> {
             .get(),
       );
 
-      // La liberación/normalización de tratos se resuelve en backend (Cloud Functions + reglas).
-      // Aquí solo filtramos para UI y evitamos escrituras cliente con permisos restringidos.
+      // La liberaciÃ³n/normalizaciÃ³n de tratos se resuelve en backend (Cloud Functions + reglas).
+      // AquÃ­ solo filtramos para UI y evitamos escrituras cliente con permisos restringidos.
 
       if (!mounted) return;
       final now = DateTime.now();
@@ -185,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // Ya existe una definición de initState y didChangeDependencies arriba, así que eliminamos estas duplicadas.
+  // Ya existe una definiciÃ³n de initState y didChangeDependencies arriba, asÃ­ que eliminamos estas duplicadas.
 
   bool hayContraofertaNueva = false;
 
@@ -334,7 +335,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ..clear()
       ..addAll(saved);
 
-    // Primera carga de este usuario: no marcar en rojo tratos históricos ya existentes.
+    // Primera carga de este usuario: no marcar en rojo tratos histÃ³ricos ya existentes.
     if (saved.isEmpty && baselineActual.isNotEmpty) {
       _tratoEventosLeidos.addAll(baselineActual);
       await prefs.setStringList(_tratosLeidosPrefsKey(uid), _tratoEventosLeidos.toList());
@@ -403,22 +404,6 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF004d26),
         elevation: 0,
-        toolbarHeight: 68,
-        flexibleSpace: IgnorePointer(
-          child: SafeArea(
-            child: Center(
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.black12),
-                ),
-              ),
-            ),
-          ),
-        ),
         leadingWidth: 44,
         leading: Builder(
           builder: (context) {
@@ -439,7 +424,9 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         centerTitle: true,
+        titleSpacing: 0,
         title: const SizedBox.shrink(),
+        flexibleSpace: const BysappAppBarLogo(),
         actions: [
           IconButton(
             icon: Icon(Icons.handshake,
@@ -488,11 +475,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               } else if (value == 4) {
-                // Cerrar sesión
-                FirebaseAuth.instance.signOut().then((_) {
-                  if (!context.mounted) return;
-                  Navigator.pushReplacementNamed(context, '/login');
-                });
+                // Cerrar sesiÃ³n
+                Navigator.pushReplacementNamed(context, '/login');
               }
             },
             itemBuilder: (context) => [
@@ -553,27 +537,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Stack(
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: SafeArea(
-              child: Container(
-                margin: const EdgeInsets.only(top: 8),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Text(
-                  'DEBUG HOME 2026-04-28',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ),
-          ),
           Positioned.fill(
             child: Opacity(
               opacity: 0.08,
